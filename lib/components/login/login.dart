@@ -22,7 +22,7 @@ class _LoginState extends State<Login> {
       final username = _usernameController.text;
       final password = _passwordController.text;
 
-      if (password == "password") {
+      if (password == "pass") {
         if (username == "admin") {
           Navigator.pushReplacement(
             context,
@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
         } else if (username == "user") {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const Walkthrough()),
+            MaterialPageRoute(builder: (context) => Walkthrough()),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
