@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1021413241242",
+    "firebase_url": "https://eco-bin-8a044-default-rtdb.firebaseio.com",
+    "project_id": "eco-bin-8a044",
+    "storage_bucket": "eco-bin-8a044.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021413241242:android:9753f892e983ebcb1f0a23",
+        "android_client_info": {
+          "package_name": "com.example.masters_final_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMselOqvWrv290OUBApKvGqoKzlsymBwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
