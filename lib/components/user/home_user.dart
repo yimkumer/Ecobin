@@ -175,13 +175,13 @@ class _Home_userState extends State<Home_user> {
                         ),
                         SizedBox(height: screenWidth * 0.01),
                         Lottie.asset(
-                          'assets/login.json',
+                          'assets/wave.json',
                           width: screenWidth * 0.6,
                           height: screenWidth * 0.4,
                           fit: BoxFit.contain,
                         ),
                         Text(
-                          "Let's make the world greener together",
+                          "Let's make the world Greener together",
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.9),
                             fontSize: screenWidth * 0.05,
@@ -219,7 +219,7 @@ class _Home_userState extends State<Home_user> {
                           _buildFeatureCard(
                             "Guide",
                             "Learn proper waste management",
-                            'assets/land.json',
+                            'assets/guide.json',
                             () => Navigator.push(
                               context,
                               MaterialPageRoute(

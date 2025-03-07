@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Admin_Guide extends StatelessWidget {
-  const Admin_Guide({super.key});
+class admin_map extends StatelessWidget {
+  const admin_map({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Recycling Guide',
+          'Recycling Locations',
           style: TextStyle(
             color: Colors.white,
             fontSize: 22,
@@ -22,8 +22,7 @@ class Admin_Guide extends StatelessWidget {
         ),
       ),
       body: const Center(
-        child: Text('Admin Guide Content Coming Soon',
-            style: TextStyle(fontSize: 20)),
+        child: Text('Map Content Coming Soon', style: TextStyle(fontSize: 20)),
       ),
     );
   }

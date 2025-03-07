@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
+import 'package:masters_final_app/components/admin/admin_map.dart';
 import '../login/login.dart';
-import 'admin_guide.dart';
+import 'admin_view.dart';
 
 class Admin extends StatefulWidget {
   const Admin({super.key});
@@ -133,7 +134,7 @@ class _AdminState extends State<Admin> {
                   ),
                   SizedBox(height: screenWidth * 0.01),
                   Lottie.asset(
-                    'assets/login.json',
+                    'assets/wave.json',
                     width: screenWidth * 0.6,
                     height: screenWidth * 0.4,
                     fit: BoxFit.contain,
@@ -174,13 +175,13 @@ class _AdminState extends State<Admin> {
                           ),
                           SizedBox(height: screenWidth * 0.06),
                           _buildFeatureCard(
-                            "Manage Guide",
-                            "How to use the admin panel",
-                            'assets/land.json',
+                            "View Users",
+                            "See all registered users",
+                            'assets/list.json',
                             () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Admin_Guide(),
+                                builder: (context) => const admin_view(),
                               ),
                             ),
                           ),
@@ -192,7 +193,7 @@ class _AdminState extends State<Admin> {
                             () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Admin_Guide(),
+                                builder: (context) => const admin_map(),
                               ),
                             ),
                           ),
