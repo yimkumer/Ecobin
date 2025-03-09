@@ -1,3 +1,3 @@
-# masters_final_app
+# ECOBIN
 
-A new Flutter project.
+ A mobile app called 'EcoBin' that helps people manage their biodegradable waste.  It addresses the problem of inefficient disposal by connecting users with convenient options.
