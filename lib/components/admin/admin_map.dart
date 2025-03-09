@@ -113,7 +113,10 @@ class _admin_mapState extends State<admin_map> {
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                          content: Text('Location added successfully')),
+                        content: Text('Location added successfully'),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ),
                     );
 
                     await _loadLocations();
@@ -163,7 +166,11 @@ class _admin_mapState extends State<admin_map> {
         await _loadLocations();
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Location deleted successfully')),
+            const SnackBar(
+              content: Text('Location deleted successfully'),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 2),
+            ),
           );
         }
       } catch (e) {
