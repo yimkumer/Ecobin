@@ -17,7 +17,7 @@ class _admin_mapState extends State<admin_map> {
   bool _isLoading = true;
   GoogleMapController? _mapController;
   static const LatLng _initialPosition =
-      LatLng(25.8791, 93.7650); // Dimapur coordinates
+      LatLng(25.8522, 93.7480); // Dimapur SJU coordinates
 
   @override
   void initState() {
