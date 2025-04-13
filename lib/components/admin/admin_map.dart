@@ -41,7 +41,7 @@ class _admin_mapState extends State<admin_map> {
                 position: LatLng(location['latitude'], location['longitude']),
                 infoWindow: InfoWindow(
                   title: location['name'],
-                  snippet: 'Active Till: ${location['activeTill']}',
+                  snippet: '${location['duration']}',
                 ),
               ),
             );
@@ -57,41 +57,104 @@ class _admin_mapState extends State<admin_map> {
 
   Future<void> _showAddLocationDialog(LatLng position) async {
     String locationName = '';
-    DateTime selectedDate = DateTime.now().add(const Duration(days: 1));
+    DateTime startDate = DateTime.now().add(const Duration(days: 1));
+    DateTime endDate = startDate.add(const Duration(days: 1));
+    TimeOfDay startTime = const TimeOfDay(hour: 8, minute: 0);
+    TimeOfDay endTime = const TimeOfDay(hour: 17, minute: 0);
 
     await showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
           title: const Text('Add Location'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Location Name',
-                  border: OutlineInputBorder(),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Location Name',
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (value) => locationName = value,
                 ),
-                onChanged: (value) => locationName = value,
-              ),
-              const SizedBox(height: 16),
-              ListTile(
-                title: const Text('Active Till'),
-                subtitle: Text(DateFormat('dd MMM, yyyy').format(selectedDate)),
-                trailing: const Icon(Icons.calendar_today),
-                onTap: () async {
-                  final DateTime? picked = await showDatePicker(
-                    context: context,
-                    initialDate: selectedDate,
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(2101),
-                  );
-                  if (picked != null && picked != selectedDate) {
-                    setDialogState(() => selectedDate = picked);
-                  }
-                },
-              ),
-            ],
+                const SizedBox(height: 16),
+                ListTile(
+                  title: const Text('Start Date'),
+                  subtitle: Text(
+                    '${DateFormat('dd MMM, yyyy').format(startDate)} at ${startTime.format(context)}',
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.calendar_today),
+                        onPressed: () async {
+                          final DateTime? picked = await showDatePicker(
+                            context: context,
+                            initialDate: startDate,
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(2101),
+                          );
+                          if (picked != null) {
+                            setDialogState(() => startDate = picked);
+                          }
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.access_time),
+                        onPressed: () async {
+                          final TimeOfDay? picked = await showTimePicker(
+                            context: context,
+                            initialTime: startTime,
+                          );
+                          if (picked != null) {
+                            setDialogState(() => startTime = picked);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: const Text('End Date'),
+                  subtitle: Text(
+                    '${DateFormat('dd MMM, yyyy').format(endDate)} at ${endTime.format(context)}',
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.calendar_today),
+                        onPressed: () async {
+                          final DateTime? picked = await showDatePicker(
+                            context: context,
+                            initialDate: endDate,
+                            firstDate: startDate,
+                            lastDate: DateTime(2101),
+                          );
+                          if (picked != null) {
+                            setDialogState(() => endDate = picked);
+                          }
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.access_time),
+                        onPressed: () async {
+                          final TimeOfDay? picked = await showTimePicker(
+                            context: context,
+                            initialTime: endTime,
+                          );
+                          if (picked != null) {
+                            setDialogState(() => endTime = picked);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -102,12 +165,19 @@ class _admin_mapState extends State<admin_map> {
               onPressed: () async {
                 if (locationName.isNotEmpty) {
                   try {
+                    String duration =
+                        '${DateFormat('dd MMM').format(startDate)} ${startTime.format(context)} - '
+                        '${DateFormat('dd MMM').format(endDate)} ${endTime.format(context)}';
+
                     await _locationsRef.push().set({
                       'name': locationName,
                       'latitude': position.latitude,
                       'longitude': position.longitude,
-                      'activeTill':
-                          DateFormat('dd MMM, yyyy').format(selectedDate),
+                      'startDate': startDate.toIso8601String(),
+                      'startTime': '${startTime.hour}:${startTime.minute}',
+                      'endDate': endDate.toIso8601String(),
+                      'endTime': '${endTime.hour}:${endTime.minute}',
+                      'duration': duration,
                       'createdAt': DateTime.now().toIso8601String(),
                     });
 

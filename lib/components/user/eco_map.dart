@@ -55,9 +55,9 @@ class _eco_mapState extends State<eco_map> {
       isDismissible: true,
       backgroundColor: Colors.transparent,
       builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.75,
-        minChildSize: 0.4,
-        maxChildSize: 0.75,
+        initialChildSize: 0.85,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
         builder: (_, controller) => Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -74,7 +74,6 @@ class _eco_mapState extends State<eco_map> {
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              // Location info container
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
                 decoration: BoxDecoration(
@@ -92,7 +91,6 @@ class _eco_mapState extends State<eco_map> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Location name
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Text(
@@ -104,7 +102,6 @@ class _eco_mapState extends State<eco_map> {
                         ),
                       ),
                     ),
-
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
@@ -126,12 +123,14 @@ class _eco_mapState extends State<eco_map> {
                             color: Color(0xff388E3C),
                           ),
                           const SizedBox(width: 8),
-                          Text(
-                            'Active Until : ${location['activeTill']}',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xff388E3C),
+                          Flexible(
+                            child: Text(
+                              location['duration'] ?? 'Schedule not available',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff388E3C),
+                              ),
                             ),
                           ),
                         ],
@@ -159,7 +158,7 @@ class _eco_mapState extends State<eco_map> {
                       ),
                       infoWindow: InfoWindow(
                         title: location['name'],
-                        snippet: 'Active Until : ${location['activeTill']}',
+                        snippet: location['duration'],
                       ),
                     ),
                   },
@@ -227,7 +226,7 @@ class _eco_mapState extends State<eco_map> {
                         subtitle: Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Text(
-                            'Active Until : ${location['activeTill']}',
+                            location['duration'] ?? 'Schedule not available',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black87.withOpacity(0.7),
